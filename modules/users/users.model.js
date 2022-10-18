@@ -2,7 +2,6 @@ const {getSequelize} = require("../../db");
 const {DataTypes} = require("sequelize");
 const {ContactModel} = require("../contacts/contacts.model");
 
-
 const sequelize = getSequelize();
 
 const UserModel = sequelize.define('User', {
