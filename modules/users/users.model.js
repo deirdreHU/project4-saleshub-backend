@@ -21,11 +21,11 @@ const UserModel = sequelize.define('User', {
   }
 });
 
-UserModel.hasMany(ContactModel, {foreignKey: 'assignedTo'});
+// UserModel.hasMany(ContactModel, {foreignKey: 'assignedTo'});
 
-ContactModel.belongsTo(UserModel, {foreignKey: 'assignedTo', targetKey: 'userId'});
+// ContactModel.belongsTo(UserModel, {foreignKey: 'assignedTo', targetKey: 'userId'});
 
-UserModel.sync();
+// UserModel.sync();
 
 module.exports = {
   UserModel

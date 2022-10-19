@@ -13,9 +13,14 @@ app.use(fileUpload());
 
 const usersRoutes = require("./modules/users/routes");
 const contactRoutes = require("./modules/contacts/routes");
+const noteRoutes = require("./modules/notes/routes");
+const {setRelations} = require("./modules/relations");
 
 app.use("/api/users", usersRoutes);
 app.use("/api/contacts", contactRoutes);
+app.use("/api/notes", noteRoutes);
+
+setRelations();
 
 app.listen(PORT, () => {
   console.log(`The server set up at port: ${PORT}`);
