@@ -2,7 +2,7 @@ const { Client } = require('pg')
 const { Sequelize } = require('sequelize');
 
 const getSequelize = () => {
-  return new Sequelize(`postgres://deirdrehu:97378261@localhost:5432/saleshub`);
+  return new Sequelize(`postgres://mqzupfui:UrwfvWGVZjQ1uO5heWhBPWyb1FOJOsoJ@tiny.db.elephantsql.com/mqzupfui`);
 }
 
 const getConnection = async () => {

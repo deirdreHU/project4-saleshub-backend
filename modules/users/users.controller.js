@@ -1,6 +1,6 @@
 const {UsersService} = require("./users.service");
 const bcrypt = require("bcryptjs");
-const jxwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
 class UsersController {
   constructor() {}
