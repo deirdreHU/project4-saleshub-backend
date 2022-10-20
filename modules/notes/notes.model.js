@@ -18,6 +18,7 @@ const NotesModel = sequelize.define('Note', {
     }
 });
 
+NotesModel.sync();
 
 module.exports = {
     NotesModel

@@ -5,11 +5,11 @@ const {UserModel} = require("./users/users.model");
 
 async function setRelations() {
 
-    await UserModel.sync({force: true});
+    // await UserModel.sync({force: true});
 
-    await ContactModel.sync({force: true});
+    // await ContactModel.sync({force: true});
 
-    await NotesModel.sync({force: true});
+    // await NotesModel.sync({force: true});
 
     UserModel.hasMany(ContactModel, {foreignKey: 'assignedTo', as: 'contacts'});
     ContactModel.belongsTo(UserModel, {foreignKey: 'assignedTo', targetKey: 'userId'});

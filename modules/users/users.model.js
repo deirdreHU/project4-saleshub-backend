@@ -25,7 +25,7 @@ const UserModel = sequelize.define('User', {
 
 // ContactModel.belongsTo(UserModel, {foreignKey: 'assignedTo', targetKey: 'userId'});
 
-// UserModel.sync();
+UserModel.sync();
 
 module.exports = {
   UserModel
