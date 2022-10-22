@@ -35,7 +35,7 @@ const ContactModel = sequelize.define('Contact', {
   }
 })
 
-ContactModel.sync();
+// ContactModel.sync();
 
 
 module.exports = {

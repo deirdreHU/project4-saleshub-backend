@@ -29,9 +29,8 @@ const DealsModel = sequelize.define('Deal', {
     }
     });
 
-    DealsModel.sync();
+// DealsModel.sync();
 
-
-    module.exports = {
-        DealsModel
-    }
+module.exports = {
+    DealsModel
+}

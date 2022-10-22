@@ -22,7 +22,7 @@ const DealNotesModel = sequelize.define('DealNote', {
 });
 
 
-DealNotesModel.sync();
+// DealNotesModel.sync();
 
 module.exports = {
     DealNotesModel

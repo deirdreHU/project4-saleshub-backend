@@ -1,6 +1,7 @@
 const {getSequelize} = require("../../db");
-const {DataTypes, Deferrable} = require("sequelize");
+const {DataTypes} = require("sequelize");
 // const {UserModel} = require("../users/users.model");
+
 
 const sequelize = getSequelize();
 
@@ -13,12 +14,15 @@ const NotesModel = sequelize.define('Note', {
     content: {
         type: DataTypes.STRING
     },
+    contact: {
+        type: DataTypes.INTEGER
+    },
     author: {
         type: DataTypes.INTEGER,
     }
 });
 
-NotesModel.sync();
+// NotesModel.sync();
 
 module.exports = {
     NotesModel

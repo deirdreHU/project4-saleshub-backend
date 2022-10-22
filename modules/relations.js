@@ -7,22 +7,14 @@ const {DealNotesModel} = require("./deal-notes/deal-notes.model");
 
 async function setRelations() {
 
-    // await UserModel.sync({force: true});
-
-    // await ContactModel.sync({force: true});
-
-    // await NotesModel.sync({force: true});
-
-    // await DealsModel.sync({force: true});
-
     UserModel.hasMany(ContactModel, {foreignKey: 'assignedTo', as: 'contacts'});
     ContactModel.belongsTo(UserModel, {foreignKey: 'assignedTo', targetKey: 'userId'});
 
-    UserModel.hasMany(NotesModel, { foreignKey: 'author' });
+    UserModel.hasMany(NotesModel, { foreignKey: 'author'});
     NotesModel.belongsTo(UserModel, {foreignKey: 'author', targetKey: 'userId'});
 
     ContactModel.hasMany(NotesModel, {foreignKey: 'contact', as: 'notes'});
-    NotesModel.belongsTo(ContactModel, {foreignKey: 'contact', targetKey: 'contactId'});
+    NotesModel.belongsTo(ContactModel, {foreignKey: 'contact', targetKey: 'contactId'})
 
     ContactModel.hasMany(DealsModel, { foreignKey: 'contact', as: 'deals' });
     DealsModel.belongsTo(ContactModel, { foreignKey: 'contact', targetKey: 'contactId' });
@@ -35,6 +27,16 @@ async function setRelations() {
 
     UserModel.hasMany(DealNotesModel, { foreignKey: 'author', as: 'dealNotes' });
     DealNotesModel.belongsTo(UserModel, { foreignKey: 'author', targetKey: 'userId' });
+
+    await UserModel.sync({force: true});
+
+    await ContactModel.sync({force: true});
+
+    await NotesModel.sync({force: true});
+
+    await DealsModel.sync({force: true});
+
+    await DealNotesModel.sync({force: true});
 
 }
 
