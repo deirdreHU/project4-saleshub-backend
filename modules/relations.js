@@ -2,6 +2,7 @@ const {ContactModel} = require("./contacts/contacts.model");
 const {NotesModel} = require("./notes/notes.model");
 const {UserModel} = require("./users/users.model");
 const {DealsModel} = require("./deals/deals.model");
+const {DealNotesModel} = require("./deal-notes/deal-notes.model");
 
 
 async function setRelations() {
@@ -28,6 +29,12 @@ async function setRelations() {
 
     UserModel.hasMany(DealsModel, { foreignKey: 'assignedTo', as: 'deals' });
     DealsModel.belongsTo(UserModel, { foreignKey: 'assignedTo', targetKey: 'userId' });
+
+    DealsModel.hasMany(DealNotesModel, { foreignKey: 'deal', as: 'dealNotes' });
+    DealNotesModel.belongsTo(DealsModel, { foreignKey: 'deal', targetKey: 'dealId' });
+
+    UserModel.hasMany(DealNotesModel, { foreignKey: 'author', as: 'dealNotes' });
+    DealNotesModel.belongsTo(UserModel, { foreignKey: 'author', targetKey: 'userId' });
 
 }
 

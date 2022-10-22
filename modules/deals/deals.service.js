@@ -1,9 +1,30 @@
 const {DealsModel} = require("./deals.model");
 const {ContactModel} = require("../contacts/contacts.model");
 const {UserModel} = require("../users/users.model");
+const {DealNotesModel} = require("../deal-notes/deal-notes.model");
 
 class DealsService {
     constructor() {}
+
+    async getDeal(deal_id) {
+        return DealsModel.findOne({
+            include: [
+                {
+                    model: ContactModel
+                },
+                {
+                    model: UserModel
+                },
+                {
+                    model: DealNotesModel,
+                    as: 'dealNotes'
+                }
+            ],
+            where: {
+                dealId: deal_id
+            }
+            })
+    }
 
     async searchDeals(conditions) {
     return DealsModel.findAll({
@@ -21,14 +42,14 @@ class DealsService {
 
     async getDeals() {
         return DealsModel.findAll({
-        include: [
-            {
-                model: ContactModel
-            },
-            {
-                model: UserModel
-            }
-        ]
+            include: [
+                {
+                    model: ContactModel
+                },
+                {
+                    model: UserModel
+                }
+            ]
         })
     }
 
@@ -51,8 +72,8 @@ class DealsService {
         }
         })
     }
-    }
+}
 
     module.exports = {
-    DealsService: new DealsService()
+        DealsService: new DealsService()
     }
