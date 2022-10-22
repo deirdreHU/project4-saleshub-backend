@@ -15,12 +15,14 @@ const usersRoutes = require("./modules/users/routes");
 const contactRoutes = require("./modules/contacts/routes");
 const noteRoutes = require("./modules/notes/routes");
 const dealRoutes = require("./modules/deals/routes");
+const dealNotesRoutes = require("./modules/deal-notes/routes");
 const {setRelations} = require("./modules/relations");
 
 app.use("/api/users", usersRoutes);
 app.use("/api/contacts", contactRoutes);
 app.use("/api/notes", noteRoutes);
 app.use("/api/deals", dealRoutes);
+app.use("/api/deal-notes", dealNotesRoutes);
 
 setRelations();
 
