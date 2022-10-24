@@ -5,7 +5,7 @@ const {ContactsController} = require("./contacts.controller");
 const router = express.Router();
 
 router.get('', ContactsController.getContacts);
-router.get('/search', ContactsController.searchContact);
+router.get('/search', ContactsController.queryContacts);
 router.post('', verifyUser, ContactsController.createContact);
 router.get('/:contact_id', ContactsController.getContact);
 router.delete('/:contact_id', ContactsController.deleteContact);

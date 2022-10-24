@@ -4,6 +4,10 @@ const {UserModel} = require("./users.model");
 class UsersService {
   constructor() {}
 
+  async getUsers() {
+    return UserModel.findAll();
+  }
+
   async createUser(user) {
     return UserModel.create(user);
   }
@@ -13,8 +17,7 @@ class UsersService {
   }
 
   async findUserByEmail(email) {
-    return UserModel.findOne({where: { 
-      email: email }});
+    return UserModel.findOne({where: {email}});
   }
 
   async updatePassword(user_id, newPasswordHash) {

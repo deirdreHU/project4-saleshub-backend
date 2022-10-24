@@ -2,6 +2,16 @@ const {ContactsService} = require("./contacts.service");
 
 class ContactsController{
   constructor() {}
+  async queryContacts(req, res) {
+    let {keyword = '', assignedTo = '', lifeCycleStage = ''} = req.query;
+    const contacts = await ContactsService.queryContacts(
+      keyword,
+      assignedTo.split(','),
+      lifeCycleStage.split(',')
+    );
+    res.status(200).json(contacts);
+  }
+
   async createContact(req, res) {
     const contact = req.body;
     await ContactsService.createContact(contact);
@@ -22,7 +32,16 @@ class ContactsController{
   }
 
   async getContacts(req, res) {
-    const contacts = await ContactsService.getContacts();
+    let {keyword = '', assignedTo = '', lifeCycleStage = ''} = req.query;
+    assignedTo = assignedTo.split(',');
+    lifeCycleStage = lifeCycleStage.split(',');
+    assignedTo = assignedTo.filter(item => Boolean(item)).map(item => Number(item));
+    lifeCycleStage = lifeCycleStage.filter(item => Boolean(item));
+    const contacts = await ContactsService.queryContacts(
+      keyword,
+      assignedTo,
+      lifeCycleStage
+    );
     res.status(200).json(contacts);
   }
 
