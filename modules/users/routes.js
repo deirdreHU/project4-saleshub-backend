@@ -5,6 +5,7 @@ const {handleImage} = require("../../middlewares/handleImage");
 
 const router = express.Router();
 
+router.get('', UsersController.getUsers);
 router.post("/register", UsersController.signUp);
 router.post('/login', UsersController.signIn);
 router.put("/password", verifyUser, UsersController.updatePassword);

@@ -5,6 +5,11 @@ const jwt = require("jsonwebtoken");
 class UsersController {
   constructor() {}
 
+  async getUsers(req, res) {
+    const users = await UsersService.getUsers();
+    res.status(200).json(users);
+  }
+
   async signUp(req, res) {
     try {
       const user = req.body;
@@ -40,11 +45,11 @@ class UsersController {
 
   async signIn(req, res) {
     try {
-      let oldUser,
-        token;
-      const {username, password} = req.body;
+      let oldUser, 
+      token;
+      const {email, password} = req.body;
       // check user if exist
-      oldUser = await UsersService.findUserByUsername(username);
+      oldUser = await UsersService.findUserByUsername(email);
       if (!oldUser) {
         return res.status(400).send("Invalid Credentials");
       }
