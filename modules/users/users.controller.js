@@ -49,7 +49,7 @@ class UsersController {
       token;
       const {email, password} = req.body;
       // check user if exist
-      oldUser = await UsersService.findUserByUsername(email);
+      oldUser = await UsersService.findUserByEmail(email);
       if (!oldUser) {
         return res.status(400).send("Invalid Credentials");
       }
