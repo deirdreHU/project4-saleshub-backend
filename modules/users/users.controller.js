@@ -1,6 +1,7 @@
 const {UsersService} = require("./users.service");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { v4: uuidv4 } = require('uuid');
 
 class UsersController {
   constructor() {}
@@ -13,6 +14,7 @@ class UsersController {
   async signUp(req, res) {
     try {
       const user = req.body;
+
       let oldUser = await UsersService.findUserByEmail(user.email);
 
       // check user if exist
@@ -21,18 +23,22 @@ class UsersController {
       }
 
       oldUser = await UsersService.findUserByUsername(user.username);
+      
       if (oldUser) {
         return res.status(409).send("User already exist. Please login.");
       }
 
       // create new user
       user.passwordHash = await bcrypt.hash(user.password, 10);
+      user.companyId = uuidv4();
+      user.isAdmin = false;
       let newUser = await UsersService.createUser(user);
 
       let token = jwt.sign({
         email: user.email,
         username: user.username,
-        id: newUser.userId
+        id: newUser.userId,
+        companyId: oldUser.companyId
       }, process.env.JWT_SECRET)
       res.status(201).json({
         token
@@ -59,13 +65,44 @@ class UsersController {
         token = jwt.sign({
           email: oldUser.email,
           username: oldUser.username,
-          id: oldUser.userId
+          id: oldUser.userId,
+          companyId: oldUser.companyId
         }, process.env.JWT_SECRET)
       } else {
         return res.status(400).send("Invalid Credentials");
       }
       res.status(200).json({token});
     } catch (err) {
+      console.log(err)
+      res.status(500).send(err);
+    }
+  }
+
+  async createStaff(req, res) {
+    try
+    {
+      const {username, email, password, isAdmin} = req.body;
+
+      const oldUser1 = await UsersService.findUserByEmail(email);
+      const oldUser2 = await UsersService.findUserByUsername(username);
+      if(oldUser1 || oldUser2)
+      {
+        return res.status(409).send("User already exist. Please login.");
+      }
+
+      let newUser = await UsersService.createUser({
+        username: username,
+        email: email,
+        password: await bcrypt.hash(password, 10),
+        companyId: req.user.companyId,
+        isAdmin: isAdmin
+      });
+
+      res.status(201).send("User created");
+    }
+
+    catch(err)
+    {
       console.log(err)
       res.status(500).send(err);
     }

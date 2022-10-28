@@ -10,22 +10,29 @@ const UserModel = sequelize.define('User', {
     primaryKey: true,
     autoIncrement: true
   },
+
   username: {
     type: DataTypes.STRING,
   },
+
   passwordHash: {
     type: DataTypes.STRING
   },
+
   email: {
     type: DataTypes.STRING
+  }, 
+  
+  companyId: {
+    type: DataTypes.STRING
+  },
+
+  isAdmin: {
+    type: DataTypes.BOOLEAN
   }
+
 });
 
-// UserModel.hasMany(ContactModel, {foreignKey: 'assignedTo'});
-
-// ContactModel.belongsTo(UserModel, {foreignKey: 'assignedTo', targetKey: 'userId'});
-
-// UserModel.sync();
 
 module.exports = {
   UserModel
