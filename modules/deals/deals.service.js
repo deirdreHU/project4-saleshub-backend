@@ -17,7 +17,8 @@ class DealsService {
                 },
                 {
                     model: DealNotesModel,
-                    as: 'dealNotes'
+                    as: 'dealNotes',
+                    include: [UserModel]
                 }
             ],
             where: {

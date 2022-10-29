@@ -31,14 +31,14 @@ class UsersController {
       // create new user
       user.passwordHash = await bcrypt.hash(user.password, 10);
       user.companyId = uuidv4();
-      user.isAdmin = false;
+      user.isAdmin = true;
       let newUser = await UsersService.createUser(user);
 
       let token = jwt.sign({
         email: user.email,
         username: user.username,
         id: newUser.userId,
-        companyId: oldUser.companyId
+        companyId: newUser.companyId
       }, process.env.JWT_SECRET)
       res.status(201).json({
         token
@@ -95,10 +95,10 @@ class UsersController {
         email: email,
         password: await bcrypt.hash(password, 10),
         companyId: req.user.companyId,
-        isAdmin: isAdmin
+        isAdmin: false
       });
 
-      res.status(201).send("User created");
+      res.status(201).send("Staff created");
     }
 
     catch(err)

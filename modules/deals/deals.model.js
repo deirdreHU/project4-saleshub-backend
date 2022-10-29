@@ -21,6 +21,9 @@ const DealsModel = sequelize.define('Deal', {
     closeDate: {
         type: DataTypes.STRING
     },
+    dealType: {
+        type: DataTypes.STRING
+    },
     assignedTo: {
         type: DataTypes.INTEGER
     },
