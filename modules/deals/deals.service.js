@@ -66,7 +66,7 @@ class DealsService {
         })
     }
 
-    async upodateDeal(deal_id, data) {
+    async updateDeal(deal_id, data) {
         return DealsModel.update(data, {
         where: {
             dealId: deal_id
