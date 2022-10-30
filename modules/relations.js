@@ -28,15 +28,15 @@ async function setRelations() {
     UserModel.hasMany(DealNotesModel, { foreignKey: 'author', as: 'dealNotes' });
     DealNotesModel.belongsTo(UserModel, { foreignKey: 'author', targetKey: 'userId' });
 
-    await UserModel.sync({force:true});
+    await UserModel.sync({alter:true});
 
-    await ContactModel.sync({force:true});
+    await ContactModel.sync({alter:true});
 
-    await NotesModel.sync({force:true});
+    await NotesModel.sync({alter:true});
 
-    await DealsModel.sync({force:true});
+    await DealsModel.sync({alter:true});
 
-    await DealNotesModel.sync({force:true});
+    await DealNotesModel.sync({alter:true});
 
 }
 
