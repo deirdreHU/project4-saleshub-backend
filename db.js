@@ -6,7 +6,7 @@ let sequelizeConn;
 const getSequelize = () => {
   if(!sequelizeConn)
     {
-      sequelizeConn = new Sequelize(`postgres://mqzupfui:UrwfvWGVZjQ1uO5heWhBPWyb1FOJOsoJ@tiny.db.elephantsql.com/mqzupfui`);
+      sequelizeConn = new Sequelize(`postgres://mqzupfui:mDjniZh_IhTvyRDz2XJbfvYwo_xjrI6g@tiny.db.elephantsql.com/mqzupfui`);
     }
   return sequelizeConn;
 }
